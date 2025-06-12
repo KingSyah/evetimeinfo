@@ -25,7 +25,7 @@ Because the *real battle* is sometimes against time zones, not Triglavians.
 
 ## 📸 Screenshot
 
-![EVE Time Info Screenshot](https://kingsyah.github.io/evetimeinfo/screenshot.png)
+![EVE Time Info Screenshot](https://github.com/KingSyah/evetimeinfo/blob/8e374c1616d4ece59457d06c7d71a1fafd991393/Screenshot.png)
 
 ---
 
