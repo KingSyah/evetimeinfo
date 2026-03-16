@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVE Times Info</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.add(saved + '-mode');
+        })();
+    </script>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div class="page-wrapper">
+    <header>
+        <h1>
+            💀 EVE Times Info
+            <a href="https://www.notion.so/1df557b9175680fe88d8f506c43e6dc8" target="_blank" rel="noopener noreferrer" class="about-link" title="About EVE Times Info">ℹ️</a>
+        </h1>
+        <div class="settings">
+            <div class="setting-item">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Dark Mode</span>
+            </div>
+            <div class="setting-item">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="format-toggle-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">24-Hour</span>
+            </div>
+            <div class="setting-item">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="local-time-toggle-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Device Time</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- EVE Status + EVE Time -->
+        <section class="main-clocks">
+            <div class="clock-card eve-status">
+                <h2>
+                    <span id="status-icon"></span> EVE Status
+                    <button id="refresh-status-btn" title="Refresh Status">🔄</button>
+                </h2>
+                <p>Server: <span id="server-status-text">Loading...</span></p>
+                <p>Players: <span id="player-count">Loading...</span></p>
+            </div>
+
+            <div class="clock-card eve-time-card">
+                <h2>⏰ EVE Time (UTC)</h2>
+                <p class="time eve-time-display" id="eve-time">--:--:--</p>
+                <p class="date" id="eve-date">---, -- --- ----</p>
+                <div class="downtime-info">
+                    <p class="downtime-label">Next Downtime</p>
+                    <p class="downtime-countdown" id="downtime-countdown">--:--:--</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Indonesia / Device Clocks -->
+        <section class="local-clocks">
+            <div id="indonesia-clocks-wrapper">
+                <h2 class="section-heading">🇮🇩 Indonesian Timezones</h2>
+                <div class="indonesia-clocks-container">
+                    <div class="clock-card wib-highlight">
+                        <h3>WIB · UTC+7</h3>
+                        <p class="time" id="wib-time">--:--:--</p>
+                        <p class="date" id="wib-date">---, -- --- ----</p>
+                    </div>
+                    <div class="other-zones-grid">
+                        <div class="clock-card">
+                            <h3>WITA · UTC+8</h3>
+                            <p class="time" id="wita-time">--:--:--</p>
+                            <p class="date" id="wita-date">---, -- --- ----</p>
+                        </div>
+                        <div class="clock-card">
+                            <h3>WIT · UTC+9</h3>
+                            <p class="time" id="wit-time">--:--:--</p>
+                            <p class="date" id="wit-date">---, -- --- ----</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="device-clock-wrapper" class="hidden">
+                <h2 class="section-heading">💻 Device Time</h2>
+                <div class="clock-card">
+                    <h3>Local Time</h3>
+                    <p class="time" id="user-time">--:--:--</p>
+                    <p class="date" id="user-date">---, -- --- ----</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- World Clocks -->
+        <section class="world-clocks">
+            <h2 class="section-heading">🌍 World Clocks</h2>
+            <div class="world-clock-grid">
+                <div class="clock-card">
+                    <select class="timezone-select" id="tz1"></select>
+                    <p class="time" id="world-time-1">--:--:--</p>
+                    <p class="date" id="world-date-1">---, -- --- ----</p>
+                </div>
+                <div class="clock-card">
+                    <select class="timezone-select" id="tz2"></select>
+                    <p class="time" id="world-time-2">--:--:--</p>
+                    <p class="date" id="world-date-2">---, -- --- ----</p>
+                </div>
+                <div class="clock-card">
+                    <select class="timezone-select" id="tz3"></select>
+                    <p class="time" id="world-time-3">--:--:--</p>
+                    <p class="date" id="world-date-3">---, -- --- ----</p>
+                </div>
+                <div class="clock-card">
+                    <select class="timezone-select" id="tz4"></select>
+                    <p class="time" id="world-time-4">--:--:--</p>
+                    <p class="date" id="world-date-4">---, -- --- ----</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Converter -->
+        <section class="time-converter">
+            <h2 class="section-heading">🔀 UTC Time Converter</h2>
+            <div class="converter-card">
+                <div class="converter-grid">
+                    <div class="converter-field">
+                        <label for="converter-input">UTC Time (HH:MM atau HH:MM:SS)</label>
+                        <input type="text" id="converter-input" placeholder="e.g. 14:30" autocomplete="off" spellcheck="false">
+                    </div>
+                    <div class="converter-arrow">→</div>
+                    <div class="converter-field">
+                        <label for="converter-tz-select">Target Timezone</label>
+                        <select id="converter-tz-select"></select>
+                    </div>
+                </div>
+
+                <!-- Result Panel -->
+                <div class="converter-result-panel" id="converter-result-panel">
+                    <div class="converter-result-idle" id="converter-idle-state">
+                        <span class="converter-idle-icon">⌨️</span>
+                        <span>Masukkan waktu UTC di atas untuk dikonversi</span>
+                    </div>
+                    <div class="converter-result-content hidden" id="converter-active-state">
+                        <div class="converter-main-result">
+                            <div class="converter-result-left">
+                                <div class="converter-result-time" id="converter-result">--:--</div>
+                                <div class="converter-result-tz" id="converter-result-tz">--</div>
+                            </div>
+                            <div class="converter-result-right">
+                                <div class="converter-delta-badge" id="converter-delta-badge"></div>
+                                <div class="converter-day-note" id="converter-day-note"></div>
+                            </div>
+                        </div>
+                        <div class="converter-meta-row">
+                            <span class="converter-meta-item" id="converter-utc-now">EVE now: --:--</span>
+                            <span class="converter-meta-sep">·</span>
+                            <span class="converter-meta-item" id="converter-relative">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text">Forged in New Eden · kingsyah © <span id="footer-year"></span></p>
+    </footer>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
