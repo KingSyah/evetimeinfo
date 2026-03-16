@@ -1,40 +1,51 @@
-# 🌌 EVE Time Info — Galactic Time Buddy for Capsuleers
+# 💀 EVE Time Info — Galactic Time Buddy for Capsuleers
 
 **https://kingsyah.github.io/evetimeinfo/**
 
 ⏱️ **EVE Online runs on UTC time**, and if you've ever missed a fleet op, PI cycle, or structure timer because your Earth-bound brain runs on local time — you're not alone, pilot!
 
-**EVE Time Info** is your slick, no-nonsense web tool that tells you:
-- 📆 What time it is in **EVE (UTC)**
-- 🕖 Your **local time** (auto-detected)
-- 🔄 Easy comparison between **EVE time and your own timezone**
-- 🛰️ Perfect for scheduling fleet ops, mining fleets, or AFK cloaky camping 😎
+**EVE Time Info** is your slick, no-nonsense web tool built with a Matrix-terminal aesthetic, keeping every capsuleer synced across New Eden and Earth.
 
 ---
 
-## 🚀 Why Use This?
+## 🚀 Features
 
-Because the *real battle* is sometimes against time zones, not Triglavians.
+### ⏰ EVE Time & Server Status
+- Live **EVE Time (UTC)** — always in sync
+- **Countdown to daily downtime** (11:00 UTC) with blinking alert when < 10 minutes away
+- Real-time **Tranquility server status** — online/offline + current player count, with manual refresh button
 
-- ✅ No ads, no login, no corp drama
-- ✅ Works on any browser (even on Jita 4-4 undock)
-- ✅ Super lightweight, loads faster than a Garmur
-- ✅ Mobile-friendly (for when you're doing market stuff on the toilet 🚽)
+### 🌏 Timezone Clocks
+- **Indonesian Timezones** — WIB (UTC+7), WITA (UTC+8), WIT (UTC+9) displayed simultaneously
+- Toggle to show **your device's local time** instead
+- **World Clocks** — 4 fully customizable timezone slots, saved between sessions
+
+### 🔀 UTC Time Converter *(new!)*
+- Paste any UTC time (e.g. `14:30` or `14:30:00`) and instantly see it in any timezone
+- **Live relative info** — tells you if the time is in the future, past, or happening now:
+  - `⏳ 2 jam 15 menit lagi` — coming up
+  - `⏪ 30 menit lalu` — already passed
+  - `⚡ Sekarang` — happening right now
+- Detects **day shifts** (+1 day / -1 day) automatically
+- Updates every second so the countdown stays accurate
+- Target timezone preference is saved between sessions
+
+### 🎨 UI & Theming
+- **Light / Dark Mode** toggle — defaults to light, dark mode activates full **Matrix rain effect** 🟩
+- **12h / 24h format** toggle
+- Fully **mobile-friendly** and responsive
+- No frameworks — pure vanilla HTML + CSS + JS
 
 ---
 
-## 📸 Screenshot
+## 🛠️ Tech Stack
 
-![EVE Time Info Screenshot](https://github.com/KingSyah/evetimeinfo/blob/8e374c1616d4ece59457d06c7d71a1fafd991393/Screenshot.png)
-
----
-
-## 🛠️ How It Works
-
-This site uses:
 - Vanilla HTML + CSS + JS (no React bloat here!)
-- JavaScript Date objects to keep things auto-updating
-- UTC-based clock sync to match EVE Server time
+- `Intl.DateTimeFormat` API for accurate multi-timezone display
+- EVE ESI API (`/latest/status/`) for live server status
+- Canvas-based Matrix rain animation (dark mode only)
+- Google Fonts: **Orbitron** + **Share Tech Mono**
+- All preferences saved via `localStorage`
 
 ---
 
@@ -44,10 +55,13 @@ The EVE server has never reset its clock — it's all in **UTC**, all the time. 
 
 ---
 
-## 💡 Ideas for Future Features
-- Countdown to daily reset or downtime
-- Fleet op planner with time conversion
-- Multiple timezone support for corp leaders
-- Optional ship spinning background 😏
+## ✅ No Nonsense
 
+- No ads, no login, no corp drama
+- Works on any browser (even on Jita 4-4 undock)
+- Super lightweight, loads faster than a Garmur
+- Mobile-friendly (for when you're doing market stuff on the toilet 🚽)
 
+---
+
+*Forged in New Eden by kingsyah*
