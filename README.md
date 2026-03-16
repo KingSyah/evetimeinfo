@@ -8,6 +8,11 @@
 
 ---
 
+## 📸 Screenshot
+
+![EVE Time Info Screenshot](https://github.com/KingSyah/evetimeinfo/blob/c3bb305ee6927d02410e1ab255d50b178988d988/Screenshot.png)
+
+---
 ## 🚀 Features
 
 ### ⏰ EVE Time & Server Status
